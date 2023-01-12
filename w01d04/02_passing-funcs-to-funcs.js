@@ -1,6 +1,6 @@
 const runMyFunction = function(anotherFunc) {
   // console.log(anotherFunc.toString()); // sayHello.toString()
-  anotherFunc('alice');
+  anotherFunc(console.log);
 };
 
 const sayHello = function(name) {
@@ -12,4 +12,4 @@ const addTwo = function(num) {
 }
 
 runMyFunction(sayHello);
-runMyFunction(addTwo);
+// runMyFunction(addTwo);
