@@ -11,3 +11,9 @@
 * Make the test(s) pass, then refactor your code to fix any `eslint` errors/warnings
 * Google for syntax!
 * If you wonder "is there a problem with the test or a problem with my code?"... there's a problem with your code :)
+
+```js
+// for..in gives you the index
+// for..of gives you the element
+// forEach gives you the element, the index, and the ogArray
+```
