@@ -1,7 +1,21 @@
-// implement a function called sayHello that takes the name of the saluted and returns what would be said.
-const sayHello = () => {
+// implement a function called sayHello that takes the name of the saluted and 
+// returns what would be said.
+const sayHello = (toWhom) => {
+  let output = '';
+  output = `Hello, ${toWhom}!`;
+  return output;
 };
 
-// show some test code here at first, and then factor it out later
+const sayGoodbye = (toWhom) => {
+  let output = '';
+  output = `Goodbye, ${toWhom}!`;
+  return output;
+};
 
 // make the functions exportable
+const objectOfFunctions = {
+  sayHello: sayHello,
+  sayGoodbye: sayGoodbye
+};
+
+module.exports = objectOfFunctions;
