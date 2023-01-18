@@ -46,18 +46,6 @@
   - Packets arrive in order
   - Useful when guaranteed communication is needed
 
-### HTTP
-- **H**yper**T**ext **T**ransfer **P**rotocol
-- Protocol for how messages are formatted and transmitted
-- Call and response communication
-- _State-less_: no memory of any previous communication
-- Routes to resources are made up of methods (verbs) and paths
-- **METHODS**: GET, POST, PUT, PATCH, DELETE
-- **PATHS**: `/users`, `/unicorns/123`
-- Returns status codes for each communication (eg. 200, 202, 302, 404, 500)
-- Response headers contain information about the response such as media type and content size
-- Reponse body contains the content (JSON, html, etc)
-
 ### Useful Links
 * [OSI Model](https://en.wikipedia.org/wiki/OSI_model)
 * [Net package documentation](https://nodejs.org/api/net.html)
