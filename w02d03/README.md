@@ -6,61 +6,58 @@
 - [x] TCP demo
 - [ ] HTTP fundamentals [stretch]
 
-### Networking
-* computers talking to each other
-* internet
+### What is networking?
+- Communication between machines on a network
 
-### Internet Protocol
-* street address for the computer we want to talk to
-* IPv4 127.0.0.1 192.168.2.2
-* IPv6 2001:db8:3333:4444:5555:6666:7777:8888
+### What is a protocol?
+- A defined standard for how requests and responses are sent between network devices
 
-MAC Address - permanent address for a device
+### The OSI Model
+- **O**pen **S**ystems **I**nterconnection Model developed by the International Organization for Standardization (ISO)
+- Conceptual model of how data is transmitted over a network
 
-### Port
-* uniquely identifies an app running on the other computer
-* 65,535 ports to choose from
-  * HTTP 80
-  * HTTPS 443
-  * SSH 22
-  * Postgres 5432
-  * 3000 - 9000
-  * Minecraft 25565
+1. **Physical** - physical pieces of hardware
+2. **Datalink** - how the physical device is connect to the network
+3. **Network** - communication between devices over the network
+4. **Transport** - splits up the network communication into ports (~65000 of them)
+5. **Session** - establishes a session between two connected devices
+6. **Presentation** - data translation layer (encryption and decryption)
+7. **Application** - the application (client or server)
 
-### Transport Control Protocol (TCP)
-* Breaks your message down into packets (envelope)
-* Header holds the information of the recipient and the sender
-* Triple handshake
-* Lost packets are resent
-* Packets are reordered when they arrive
+### TCP/IP Model
+1. **Network Access** - physical devices and how they connect to the network
+2. **Internetwork** - communication between devices on the network
+3. **Transport** - splits up the network communication into ports
+4. **Application** - clients and servers/applications and services/sessions and encryption
 
-### User Datagram Protocol (UDP)
-* For streaming/low latency
-* Connectionless protocol
-* Packets are NOT resent
+### Transport Layer Protocols
+- Break data into packets to be sent over the network layer
+- Give each packet a header with origin and destination
+- **UDP**: **U**ser **D**atagram **P**rotocol
+  - Smaller header size (8 bytes) which results in smaller packet sizes
+  - _Connectionless_ ie. there is no need to establish or maintain a connection
+  - No error recovery (any corrupted packets are discarded)
+  - Packets can arrive in any order
+  - Useful for streaming/low latency applications
+- **TCP**: **T**ransportation **C**ontrol **P**rotocol
+  - Larger header size (20 bytes)
+  - Requires a connection (3-way handshake)
+  - Corrupted packets are reported to the server and are re-sent
+  - Packets arrive in order
+  - Useful when guaranteed communication is needed
 
-### Event-driven Programming
-* program moves forward when an event occurs
+### HTTP
+- **H**yper**T**ext **T**ransfer **P**rotocol
+- Protocol for how messages are formatted and transmitted
+- Call and response communication
+- _State-less_: no memory of any previous communication
+- Routes to resources are made up of methods (verbs) and paths
+- **METHODS**: GET, POST, PUT, PATCH, DELETE
+- **PATHS**: `/users`, `/unicorns/123`
+- Returns status codes for each communication (eg. 200, 202, 302, 404, 500)
+- Response headers contain information about the response such as media type and content size
+- Reponse body contains the content (JSON, html, etc)
 
-Clients - wants something from the server
-Servers - has something the client wants
-
-
-all characters are stored as 1's and 0's
-encoding
-
-
-\n
-
-
-Snek
-'Name: ADL'
-'Move: down'
-
-'up'
-
-wasd
-data === 'k'
-'Move: up'
-data === 's'
-'Move: down'
+### Useful Links
+* [OSI Model](https://en.wikipedia.org/wiki/OSI_model)
+* [Net package documentation](https://nodejs.org/api/net.html)
