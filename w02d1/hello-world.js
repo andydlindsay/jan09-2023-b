@@ -18,4 +18,10 @@ const objectOfFunctions = {
   sayGoodbye: sayGoodbye
 };
 
+
+//
+// 
+//
+// console.log('console', console);
+
 module.exports = objectOfFunctions;
