@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Team</title>
+</head>
+<body>
+
+  <form method="POST" action="/team/update">
+    <label for="slug">Team ID Slug</label>
+    <input type="hidden" name="slug" value="<%= slug %>" />
+
+    <label for="teamname">Team Name</label>
+    <input id="teamname" type="text" name="teamname" value="<%= team.name %>"/>
+
+    <label for="league">League</label>
+    <input id="league" type="text" name="league" value="<%= team.league %>"/>
+    <button>Update</button>
+  </form>
+
+</body>
+</html>

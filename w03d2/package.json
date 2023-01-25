@@ -1,0 +1,16 @@
+{
+  "name": "w03d2",
+  "version": "1.0.0",
+  "description": "[] Set up the basics of an express server, including a simple response [] EJS templates. Why? Because... * separation of business logic from the presentation layer * we would like to include simple display logic (JS) within the presentation layer [] How? EJS template engines (npm i ejs, mkdir views, app.set('view engine', 'ejs');) [] With EJS templates, the HTML is (built, compiled, created) dynamically on the back-end. [] If you only modify ejs files, you do not need to rerun your server.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.2"
+  }
+}
