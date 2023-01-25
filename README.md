@@ -6,3 +6,4 @@
 * [BREAKOUT - Mock Exam Review](/breakout-w1-exam)
 * [W02D03 - Networking with TCP](/w02d03)
 * [W03D01 - Web Servers 101](/w03d01)
+* [W03D03 - HTTP Cookies & User Authentication](/w03d03)
