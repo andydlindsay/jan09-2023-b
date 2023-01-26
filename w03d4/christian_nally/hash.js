@@ -4,8 +4,9 @@ const plaintextPassword = 'abcd';
 
 
 bcrypt.genSalt(10, function(err, salt) {
+  console.log('salt', salt);
   bcrypt.hash(plaintextPassword, salt, function(err, hash) {
-    console.log('hash:',hash);
+    console.log('hash:', hash);
   });
 });
 
@@ -18,11 +19,9 @@ bcrypt.genSalt(10, function(err, salt) {
 //     // console.log('hash', hash);
 //   });
 
-// const hash = '$2b$10$7bOWn.DFgs9HkhzsTpuD1u6pReqRouddq.rO5xSKdWMZGXRehkS8e';
+const hash = '$2b$10$KeIw2gDjmlqAoalyrq.Os.GFsVCE1040CMIO.zaNoTAFWI6o0xX.i';
 
-
-// bcrypt.compare('abcd', hash)
-//   .then((result) => {
-//     console.log('do the passwords match?', result);
-//   });
-
+bcrypt.compare('abcdd', hash)
+  .then((result) => {
+    console.log('do the passwords match?', result);
+  });

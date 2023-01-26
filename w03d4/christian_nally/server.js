@@ -1,16 +1,25 @@
 const express = require('express');
 const morgan = require('morgan');
-const cookieParser = require('cookie-parser');
-const bcrypt = require('bcrypt');
+const cookieSession = require('cookie-session');
+
+const bcrypt = require('bcryptjs');
 
 const app = express();
 const port = process.env.PORT || 8080;
 
 // // middleware
 app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
 app.use(morgan('dev'));
 app.use(express.static('public'));
+app.use(cookieSession({
+  name: "lecture",
+  keys: ["fh2ht89gjs9gfe7iwhfui32h7fiwadyaf", "fhuiafgdr51635ytagGDYAF79A8DFDA"]
+}));
+
+app.use((req, res, next) => {
+  console.log('monkeyfuzz!');
+  next();
+});
 
 app.set('view engine', 'ejs');
 
@@ -37,7 +46,7 @@ app.get('/register', (req, res) => {
 });
 
 app.get('/protected', (req, res) => {
-  const username = req.cookies.username;
+  const username = req.session.username;
 
   if (!username) {
     return res.redirect('/login');
@@ -48,13 +57,13 @@ app.get('/protected', (req, res) => {
     return res.redirect('/register');
   }
 
-  console.log('users:',users);
+  console.log('users:', users);
   res.render('protected', { user });
 });
 
-// app.get('*', (req, res) => {
-//   res.redirect('/login');
-// });
+app.get('*', (req, res) => {
+  res.redirect('/login');
+});
 
 // // POST routes
 app.post('/login', (req, res) => {
@@ -67,30 +76,40 @@ app.post('/login', (req, res) => {
   }
 
   bcrypt.compare(password, user.password)
-    .then((result) => {
-      if (result) {
-        res.cookie('username', user.username);
-        res.redirect('/protected');
-      } else {
-        return res.status(401).send('Password incorrect');
-      }
-    });
+  .then((result) => {
+    console.log('do the passwords match?', result);
+    if (result) {
+      console.log('logging user in');
+      req.session.username = user.username;
+      res.redirect('/protected');
+    } else {
+      return res.status(401).send('Password incorrect');
+    }
+  });
 
 });
 
 app.post('/register', (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
-  users[username] = {
-    username,
-    password
-  };
+
+  bcrypt.genSalt(10)
+    .then((salt) => {
+      return bcrypt.hash(password, salt);
+    })
+    .then((hash) => {
+      console.log('hash', hash);
+      users[username] = {
+        username,
+        password: hash // THIS line is the way to do with with integrity. THIS is the right way to do this.
+      };
+    });
+
   console.log(users);
   res.redirect('/login');
 });
 
 app.post('/logout', (req, res) => {
-  // res.clearCookie('username');
   req.session = null;
   res.redirect('/login');
 });
