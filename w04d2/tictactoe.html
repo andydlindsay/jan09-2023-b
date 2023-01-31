@@ -1,27 +1,26 @@
-<html>
-  <head>
-    <title>TicTacToe</title>
-    <link rel="stylesheet" href="tictactoe.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- Here is how to include JS when using the jQuery solution -->
-    <script src="tictactoe-jquery.js"></script>
-  </head>
-  <body>
-    <h1>TicTacToe</h1>
-    <h2>The current player is <span id="currentPlayer">X</span></h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./tictactoe.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script type="text/javascript" src="./tictactoe.js"></script>
+  <title>Tic Tac Toe</title>
+</head>
+<body>
 
-    <table>
-      <tr>
-        <td></td><td></td><td></td>
-      </tr>
-      <tr>
-        <td></td><td></td><td></td>
-      </tr>
-      <tr>
-        <td></td><td></td><td></td>
-      </tr>
-    </table>
-    <!-- This is how you must include the JS if using the vanilla JS solution -->
-    <!-- <script src="tictactoe-vanilla.js"></script> -->
-  </body>
+  <h1>Tic Tac Toe</h1>
+  <h3 id="message">It's <span id="player">X</span>'s Turn!</h3>
+
+<table>
+  <tbody>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+  </tbody>
+</table>
+
+</body>
 </html>
