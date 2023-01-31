@@ -49,7 +49,10 @@ app.get('/protected', (req, res) => {
   const username = req.session.username;
 
   if (!username) {
-    return res.redirect('/login');
+    // return res.redirect('/login');
+    // res.render('nopermission');
+    res.send('you do not have permission to do this action');
+    return;
   }
 
   const user = users[username];
