@@ -1,18 +1,21 @@
 const pg = require('pg');
 
 // const Client = pg.Client; // single connection to rdbms
-// const Pool = pg.Pool; // "managed" collections of clients (5)
+// const Pool = pg.Pool; // "managed" collection of clients (default is 5)
 
 const Client = pg.Client;
 
+// make an object that holds all the information needed to connect to our RDBMS
 const config = {
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME
+  host: process.env.DB_HOST, // eg. 'localhost'
+  port: process.env.DB_PORT, // eg. 5432
+  user: process.env.DB_USER, // eg. 'labber'
+  password: process.env.DB_PASS, // eg. 'password'
+  database: process.env.DB_NAME // eg. 'midterm'
 };
 
+// create a new instance of the Client class using our configuration object
+// the `client` object will now know how to connect to our RDBMS
 const client = new Client(config);
 
 client.connect();
@@ -74,9 +77,3 @@ switch (verb) {
     console.log('please use a valid BREAD verb');
     client.end();
 }
-
-
-
-
-
-
