@@ -9,3 +9,4 @@
 * [W03D03 - HTTP Cookies & User Authentication](/w03d03)
 * [W05D03 - SQL from our Apps](/w05d03)
 * [BREAKOUT - Express Router](/breakout-express-router)
+* [W07D04 - Data Fetching & Other Side Effects](/w07d04)
