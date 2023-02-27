@@ -11,3 +11,4 @@
 * [BREAKOUT - Express Router](/breakout-express-router)
 * [W07D04 - Data Fetching & Other Side Effects](/w07d04)
 * [W07D05 - Custom Hooks](/w07d05)
+* [W08D01 - Bootcamp Review](/w08d01)
