@@ -1,0 +1,37 @@
+.click(function(){
+  // TODO refactor to combine this with the other TD click handler
+  const $originalTD = $(this);
+  id = $(this).data('id');
+  const $edit_field = $(`<input size="100" type="text" name="editfield" value="${$originalTD.data('value')}">`);
+  const $edit_button = $(`<button id="savebutton">Save</button>`);
+  $(this).parent().append($edit_field);
+  $(this).parent().append($edit_button);
+  $edit_button.click(function(event){
+    // alert(`new value: ${$edit_field.val()}`); // TODO extract input's current text
+    $originalTD.html($edit_field.val()); // TODO transfer it to the old TD
+    $edit_button.remove();
+    $edit_field.remove();
+    $originalTD.show(); 
+
+    // TODO send it to the API to set the value of this unit_outcome
+    const url = `/unit_outcomes/update/${id}`;
+    console.log(`connecting to ${url}`);
+    $.ajax({
+      url : url,
+      type: "POST",
+      async : true,
+      data: {newvalue: $edit_field.val()},
+      success: function(response, textStatus, jqXHR) {
+        console.log('update unit outcome response',response);
+        window.location.reload();
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.log(jqXHR);
+        console.log(textStatus);
+        console.log(errorThrown);
+        window.location.reload();
+      }
+    });
+  });
+  $(this).hide();
+});

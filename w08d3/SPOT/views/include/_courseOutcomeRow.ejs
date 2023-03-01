@@ -1,0 +1,27 @@
+<tr>
+  <td>
+    <table class="course-outcome">
+      <tr data-courseoutcomeid="<%= course_outcome_id %>" class="course-outcome">
+        <td data-id="<%= course_outcome_id %>" class="course-outcome" data-value="<%= course_outcomes[course_outcome_id].description %>">
+          <%= course_outcome_id %>::<%= course_outcomes[course_outcome_id].description %>
+        </td>
+      </tr>
+    </table>
+  </td>
+  <td>
+    <table>
+      <colgroup>
+        <col style="width:100%">
+      </colgroup>
+      <tbody>
+          <% for(let unit_outcome_id in course_outcomes[course_outcome_id].unit_outcomes) { %>
+            <tr>
+              <td data-id="<%= unit_outcome_id %>" class="unit-outcome" data-value="<%= course_outcomes[course_outcome_id].unit_outcomes[unit_outcome_id].description %>">
+                <%= unit_outcome_id %>::<%= course_outcomes[course_outcome_id].unit_outcomes[unit_outcome_id].description %>
+              </td>
+            </tr>
+          <% } %>
+      </tbody>
+    </table>
+  </td>
+</tr>

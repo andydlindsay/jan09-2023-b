@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>New Objective</title>
+  <%- include('include/_head.ejs') %>
+</head>
+<body>
+  <%- include('include/_header.ejs',profile) %>
+  <div id="timer" data-total_time="<%= total_time %>">
+    <div id="mercury"></div>
+    <div id="vacuum"></div>
+  </div>
+  <div id="question"><%- question %></div>
+  <div id="answer">
+    <div class="left"><%- answer %></div>
+    <div class="right"><%- svg_diagram %></div>
+  </div>
+  <div class="controls">
+    <a href="/objectives/delete/<%= id %>">[x]</a>
+    <a href="/objectives/edit/<%= id %>">[e]</a>   
+  </div>
+  <div class="objectives_list">
+    <a href="/cycle">Cycle</a><%- objectiveList %>
+  </div>
+</body>
+</html>

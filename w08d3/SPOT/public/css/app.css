@@ -1,0 +1,158 @@
+* {
+  box-sizing: border-box;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  /* border: 1px solid black; */
+  width: 100%;
+}
+
+nav div {
+  /* display: flex; */
+  /* border: 1px solid red; */
+}
+
+div.profile-summary {
+  
+}
+
+td.answer, th.answer, col.answer {
+  background-color: darkgray;
+}
+
+pre.hidden {
+  color: darkgrey;
+}
+
+@media only screen and (max-width: 600px) { 
+  nav div h5 { 
+    /* display: none; */
+  } 
+  td.answer, th.answer, col.answer {
+    /* display: none; */
+  }
+}
+
+body {
+  background-color: lightgray;
+}
+
+#answer {
+  display: flex;
+  flex-direction: row;
+  font-size: 1.5em;
+}
+
+#answer .left {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  justify-content: center;
+}
+
+#answer .right {
+  display: flex;
+  width: 50%;
+  justify-content: center;
+}
+
+#timer {
+  width: 100%;
+  height: 3px;
+  border: 1px solid black;
+}
+
+#mercury {
+  width: 0%;
+  height: 1px;
+  /* background-color: red; */
+  background-color: blue;
+}
+
+#vacuum {
+  height: 1px;
+  background-color: white;
+}
+
+input,
+select {
+  display: block;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+th,
+table.course-outcomes-container td,
+td.outcomes-container,
+td.course-outcome,
+td.course-description,
+td.unit-outcome
+{
+  border: 1px solid black;
+  padding: 10px;
+}
+
+td.focus {
+  font-weight: bold;
+}
+
+table pre {
+  white-space: pre-wrap;
+}
+
+h1 > a#logo {
+  animation: blinker 10s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+textarea {
+  display: block;
+}
+
+/* table tr:nth-child(even) td{
+  background-color: lightblue;
+}
+table tr:nth-child(odd) td{
+  background-color: lightgoldenrodyellow;
+}
+table tr:nth-child(2) td{
+  background-color: lightcyan;
+}
+table tr:nth-child(3) td{
+  background-color: lightsalmon;
+}
+table tr:nth-child(4) td{
+  background-color: lightseagreen;
+}
+table tr:nth-child(5) td{
+  background-color: lightyellow;
+}
+table tr:nth-child(6) td{
+  background-color: lightslategray;
+}
+table tr:nth-child(7) td{
+  background-color: lightgreen;
+} */
+
+tr:nth-of-type(odd) {
+  background-color:#ddd;
+}
+tr:nth-of-type(even) {
+  background-color:#bbb;
+}

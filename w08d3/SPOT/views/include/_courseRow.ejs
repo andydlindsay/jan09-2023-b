@@ -1,0 +1,12 @@
+<tr data-courseid="<%= course_id %>" data-type="course">
+  <td class="course-description">
+    <%= courses[course_id].description %>
+  </td>
+  <td class="outcomes-container">
+    <table class="course-outcomes-container">
+    <% for(let course_outcome_id in courses[course_id].course_outcomes) { %>
+      <%- include('_courseOutcomeRow.ejs',{course_outcome_id, course_outcomes: courses[course_id].course_outcomes}) %>
+    <% } %>
+    </table>
+  </td>
+</tr>

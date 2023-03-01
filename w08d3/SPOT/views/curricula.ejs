@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Curriculum</title>
+  <%- include('include/_head.ejs') %>
+</head>
+<body>
+  <%- include('include/_header.ejs', profile) %>
+  <div class="curriculum_list">
+    <% for (let ii = 0; ii < rows.length; ii++){ %>
+      <div><a href="/toplevel/<%= rows[ii].id %>"><%= rows[ii].description %></a></div>
+    <% } %>
+  </div>
+</body>
+</html>

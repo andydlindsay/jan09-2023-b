@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Objectives</title>
+  <%- include('include/_head.ejs') %>
+</head>
+<body>
+  <%- include('include/_header.ejs') %>
+  <form>
+    <input type="text" id="search-input" width="40" placeholder="filter rows"/>
+  </form>
+  <table id="course-list">
+    <colgroup>
+      <col style="width:20%">
+      <col style="width:80%">
+    </colgroup>
+    <tbody>
+      <tr>
+        <th>Course (aka Module)</th>
+        <th>Course Outcomes (in the form of Work Outcomes) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Unit Outcomes (in the form of Learning Outcomes)</th>
+      </tr>
+      <% for(let course_id in courses) { %>
+        <%- include('include/_courseRow.ejs', {course_id, courses}) %>
+      <% } %>
+    </tbody>
+</table>
+<script>
+(function($) { $(document).ready(function(){
+
+  //
+  // Field Click Handler
+  //
+  const fieldClickHandler = function(entityString,target){
+    console.log('fieldClick handling');
+    // TODO refactor to combine this with the other TD click handler
+    const $originalTD = $(target);
+    id = $(target).data('id');
+    const $edit_field = $(`<input size="100" type="text" name="editfield" value="${$originalTD.data('value')}">`);
+    const $edit_button = $(`<button id="savebutton">Save</button>`);
+    $(target).parent().append($edit_field);
+    $(target).parent().append($edit_button);
+    $edit_button.click(function(event){
+      // alert(`new value: ${$edit_field.val()}`); // TODO extract input's current text
+      $originalTD.html($edit_field.val()); // TODO transfer it to the old TD
+      $edit_button.remove();
+      $edit_field.remove();
+      $originalTD.show(); 
+
+      // TODO send it to the API to set the value of target unit_outcome
+      const url = `/${entityString}/update/` + id;
+      console.log(`connecting to ${url}`);
+      $.ajax({
+        url : url,
+        type: "POST",
+        async : true,
+        data: {newvalue: $edit_field.val()},
+        success: function(response, textStatus, jqXHR) {
+          console.log(`update ${entityString} response`,response);
+          window.location.reload();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.log(jqXHR);
+          console.log(textStatus);
+          console.log(errorThrown);
+          window.location.reload();
+        }
+      });
+    });
+    $(target).hide();
+  };
+
+  //
+  // Mouse Leave Handler
+  //
+  const mouseLeaveHandler = function(){
+    $(this).find('button').remove();
+    $(this).removeClass('focus');
+    console.log('mouseLeave handled');
+  }
+
+  //
+  // Filter Rows
+  //
+  $('#search-input').on('input', function(event){
+    event.preventDefault();
+    if ($(this).val().length > 2){
+      $('td:first-child').parent(`tr:not(:contains(${$(this).val()}))`).hide();
+    } else {
+      $('tr').show();      
+    }
+  });
+
+  //
+  // Courses
+  //
+
+  $('td.course-description') // ADD button to add Course Outcomes
+  .mouseenter(function(){
+    $(this).addClass('focus');
+    id = $(this).data('id');
+
+    $addButton = $(`<button class="addbutton" data-op="add:course:${id}">+</button>`);
+    $addButton.click(function(){
+      const course_id = $(this).closest('tr').data('courseid');
+      // alert(course_id);
+      const url = `/course_outcomes/new/` + course_id;
+      console.log(`connecting to ${url}`);
+      $.ajax({
+        url : url,
+        type: "GET",
+        async : true, 
+        success: function(response, textStatus, jqXHR) {
+          console.log('response',response);
+          window.location.reload();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.log('jqXHR',jqXHR);
+          console.log('textStatus',textStatus);
+          console.log('errorThrown',errorThrown);
+          window.location.reload();
+        }
+      })
+      .then((rows) => console.log(`insert blank course outcome rows`, rows))
+      .catch((error) => console.log(`insert blank course outcome error`, error));
+    });
+    $(this).append($addButton);
+  })
+  .mouseleave(mouseLeaveHandler);
+
+  //
+  // Course Outcomes
+  //
+
+  $('td.course-outcome') // ADD and DELETE buttons
+  .mouseenter(function(){
+    $(this).addClass('focus');
+    id = $(this).data('id');
+
+    $addButton = $(`<button class="addbutton" data-op="add: course-outcome:${id}">+</button>`);
+    $addButton.click(function(){
+      const course_outcome_id = $(this).closest('tr').data('courseoutcomeid');
+      // alert(course_id);
+      const url = `/unit_outcomes/new/` + course_outcome_id;
+      console.log(`connecting to ${url}`);
+      $.ajax({
+        url : url,
+        type: "GET",
+        async : true, 
+        success: function(response, textStatus, jqXHR) {
+          console.log('response',response);
+          window.location.reload();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.log('jqXHR',jqXHR);
+          console.log('textStatus',textStatus);
+          console.log('errorThrown',errorThrown);
+          window.location.reload();
+        }
+      })
+      .then((rows) => console.log(`insert blank unit outcome rows`, rows))
+      .catch((error) => console.log(`insert blank unit outcome error`, error));
+    });
+    $(this).append($addButton);
+
+    $delButton = $(`<button id="${id}" class="delbutton" data-op="del:course-outcome:${id}">-</button>`);
+    $delButton.click(function(){
+      const course_outcome_id = $(this).attr('id');
+      alert(`course_outcome_id: ${course_outcome_id}`);
+      const url = `/course_outcomes/delete/` + course_outcome_id;
+      console.log(`connecting to ${url}`);
+      $.ajax({
+        url : url,
+        type: "GET",
+        async : true, 
+        success: function(response, textStatus, jqXHR) {
+          console.log('del course outcome response',response);
+          window.location.reload();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.log('jqXHR',jqXHR);
+          console.log('textStatus',textStatus);
+          console.log('errorThrown',errorThrown);
+          window.location.reload();
+        }
+      });
+    });
+    $(this).append($delButton);
+  })
+  .mouseleave(mouseLeaveHandler)
+  .click(function(){fieldClickHandler('course_outcomes',this);});
+
+  //
+  // Unit Outcomes
+  //
+
+  $('td.unit-outcome') // DELETE button inside unit-outcome cells
+  .mouseenter(function(){
+    $(this).addClass('focus');
+    id = $(this).data('id');
+
+    $delButton = $(`<button id="${id}" class="delbutton" data-op="del:unit-outcome:${id}">-</button>`);
+    $delButton.click(function(){
+      const id = $(this).attr('id');
+      alert($(this).data('op'));
+      const url = `/unit_outcomes/delete/` + id;
+      console.log(`connecting to ${url}`);
+      $.ajax({
+        url : url,
+        type: "GET",
+        async : true,
+        success: function(response, textStatus, jqXHR) {
+          console.log('del unit outcome response',response);
+          window.location.reload();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.log(jqXHR);
+          console.log(textStatus);
+          console.log(errorThrown);
+          window.location.reload();
+        }
+      });
+    });
+    $(this).append($delButton);
+  })
+  .mouseleave(mouseLeaveHandler)
+  .click(function(){fieldClickHandler('unit_outcomes',this);});
+
+}); })(jQuery);
+</script>
+</body>
+</html>
