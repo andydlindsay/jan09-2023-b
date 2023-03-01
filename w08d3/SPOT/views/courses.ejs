@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Courses</title>
+  <%- include('include/_head.ejs') %>
+</head>
+<body>
+  <%- include('include/_header.ejs', profile) %>
+  <div class="course_list">
+    <% for (let ii = 0; ii < rows.length; ii++){ %>
+      <div><a href="/courses/<%= rows[ii].id %>"><%= rows[ii].description %></a></div>
+    <% } %>
+  </div>
+</body>
+</html>

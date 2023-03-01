@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>LHL Bootcamp Cycle</title>
+    <%- include('include/_head.ejs') %>
+  </head>
+  <style>
+    body {
+      background-color: grey;
+    }
+    .heading {
+      font-size: 18pt;
+    }
+    .textpath {
+      font-size: 15pt;
+    }
+  </style>
+  <body>
+    <%- include('include/_header.ejs') %>
+    <svg style="border: 1px solid black" width="700" height="700" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- inner arrows -->
+      <path id="line1" fill="#aaaaaa" stroke="#446688" stroke-width="2"/>
+      <path id="head1" fill="#aaaaaa" stroke="#446688" stroke-width="2"/>
+      <path id="line2" fill="#aaaaaa" stroke="#446688" stroke-width="2"/>
+      <path id="head2" fill="#aaaaaa" stroke="#446688" stroke-width="2"/>
+
+      <!-- ring 1 -->
+      <a href="/objectives/by-tag/1">
+        <path id="c1-240-360" fill="#66cc66" stroke="#446688" stroke-width="2" />
+        <text dx="100" dy="-20"><textPath class="textpath" xlink:href="#c1-240-360">Web Client</textPath></text>
+      </a>
+      <path id="c1-0-60" fill="#aaaaaa" stroke="#446688" stroke-width="2"/>
+      <text dx="20" dy="-20"><textPath class="textpath f0t60" xlink:href="#c1-0-60">Request</textPath></text>
+
+      <path id="c1-60-180" fill="#1188ee" stroke="#446688" stroke-width="2"/>
+      <text dx="320" dy="-20"><textPath class="textpath f60t180" xlink:href="#c1-60-180">Web Server</textPath></text>
+
+      <path id="c1-180-240" fill="#aaaaaa" stroke="#446688" stroke-width="2"/>
+      <text dx="200" dy="-20"><textPath class="textpath" xlink:href="#c1-180-240">Response</textPath></text>
+
+      <!-- ring 2 -->
+      <path id="c2-0-60" fill="#aaaaaa" stroke="#ff1111" stroke-width="2"/>
+      <text id="t2-0-60" dy="-20"><textPath class="textpath f0t60" xlink:href="#c2-0-60">Url, Verb, Cookies</textPath></text>
+
+      <path id="c2-60-90" fill="#aaaaaa" stroke="#ff1111" stroke-width="2"/>
+      <text id="t2-60-90" dy="-20"><textPath class="textpath" xlink:href="#c2-60-90">Middleware</textPath></text>
+
+      <path id="c2-90-120" fill="#aaaaaa" stroke="#ff1111" stroke-width="2"/>
+      <text id="t2-90-120" dy="-20"><textPath class="textpath" xlink:href="#c2-90-120">Route</textPath></text>
+
+      <path id="c2-120-150" fill="#aaaaaa" stroke="#ff1111" stroke-width="2"/>
+      <text id="t2-120-150" dy="-20"><textPath class="textpath" xlink:href="#c2-120-150">Database</textPath></text>
+
+      <path id="c2-150-180" fill="#aaaaaa" stroke="#ff1111" stroke-width="2"/>
+      <text id="t2-150-180" dy="-20"><textPath class="textpath" xlink:href="#c2-150-180">Template</textPath></text>
+
+      <path id="c2-180-240" fill="#aaaaaa" stroke="#ff1111" stroke-width="2"/>
+      <text id="t2-180-240"><textPath class="textpath" xlink:href="#c2-180-240">HTML, CSS, JS</textPath></text>
+      <text id="t2-180-240-2"><textPath class="textpath" xlink:href="#c2-180-240">Status Code, New Cookies</textPath></text>
+
+      <path id="c2-240-270" fill="#aaaaaa" stroke="#ff1111" stroke-width="2"/>
+      <text id="t2-240-270" dy="-20"><textPath class="textpath" xlink:href="#c2-240-270">Client-side JS</textPath></text>
+
+      <path id="c2-270-300" fill="#aaaaaa" stroke="#ff1111" stroke-width="2"/>
+      <text id="t2-270-300" dy="-20"><textPath class="textpath" xlink:href="#c2-270-300">Layout/Style</textPath></text>
+
+      <path id="c2-300-330" fill="#aaaaaa" stroke="#ff1111" stroke-width="2"/>
+      <text id="t2-300-330" dy="-20"><textPath class="textpath" xlink:href="#c2-300-330">Render Page</textPath></text>
+
+      <path id="c2-330-360" fill="#aaaaaa" stroke="#ff1111" stroke-width="2"/>
+      <text id="t2-330-360" dy="-20"><textPath class="textpath" xlink:href="#c2-330-360">AJAX/Click</textPath></text>
+
+      <!-- circle 3 -->
+      <path id="c3-0-360" fill="#bbbbbb" stroke="#1111ff" stroke-width="2"/>
+    </svg>
+
+    <script>
+      function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+        var angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
+
+        return {
+          x: centerX + (radius * Math.cos(angleInRadians)),
+          y: centerY + (radius * Math.sin(angleInRadians))
+        };
+      }
+
+      function describeArc(x, y, radius1, radius2, startAngle, endAngle){
+
+          var start1 = polarToCartesian(x, y, radius1, startAngle);
+          var end1 = polarToCartesian(x, y, radius1, endAngle);
+          var start2 = polarToCartesian(x, y, radius2, endAngle);
+          var end2 = polarToCartesian(x, y, radius2, startAngle);
+
+          // var largeArcFlag1 = endAngle - startAngle <= 180 ? "0" : "1";
+          // var largeArcFlag2 = startAngle - endAngle <= 180 ? "0" : "1";
+
+          var d = [
+              "M", start1.x, start1.y, 
+              "A", radius1, radius1, 0, 0, 1, end1.x, end1.y,
+              "L", start2.x, start2.y,
+              "A", radius2, radius2, 0, 0, 0, end2.x, end2.y,
+              "L", start1.x, start1.y,
+          ].join(" ");
+
+          return d;       
+      }
+
+      let r1, r2;
+      const x = 350; const y = 350;
+
+      //
+      // Inner Arrows
+      // TODO: fix the arrow scaling diff multipliers
+      r1 = 40; r2 = 60; let diff = r2 - r1;
+      document.getElementById("line1").setAttribute("d", describeArc(x, y, r1, r2, 225, 360));
+      document.getElementById("head1").setAttribute("d",
+      ["M", x, y - 7*diff/2, 
+      "L", x + 30, y - 5*diff/2,
+      "L", x, y - 3*diff/2,
+      "L", x, y - 7*diff/2,
+      ].join(" "));
+      document.getElementById("line2").setAttribute("d", describeArc(x, y, r1, r2, 45, 180));
+      document.getElementById("head2").setAttribute("d",
+      ["M", x, y + 7*diff/2, 
+      "L", x - 30, y + 5*diff/2,
+      "L", x, y + 3*diff/2,
+      "L", x, y + 7*diff/2,
+      ].join(" "));
+
+      //
+      // Ring 1
+      //
+      r1 = 100; r2 = 150;
+      document.getElementById("c1-0-60").setAttribute("d", describeArc(x, y, r1, r2, 0, 60));
+      document.getElementById("c1-60-180").setAttribute("d", describeArc(x, y, r1, r2, 60, 180));
+      document.getElementById("c1-180-240").setAttribute("d", describeArc(x, y, r1, r2, 180, 240));
+      document.getElementById("c1-240-360").setAttribute("d", describeArc(x, y, r1, r2, 240, 360));
+
+      //
+      // Ring 2
+      //
+      r1 = 150; r2 = 270;
+      document.getElementById("c2-0-60").setAttribute("d", describeArc(x, y, r1, r2, 0, 60));
+      document.getElementById("t2-0-60").setAttribute("dx",0);
+      document.getElementById("t2-0-60").setAttribute("dy",-30);
+      // consider the transform answers here: https://stackoverflow.com/questions/50909092/upside-down-text-in-svg-textpath
+
+      document.getElementById("c2-60-90").setAttribute("d", describeArc(x, y, r1, r2, 60, 90));
+      document.getElementById("t2-60-90").setAttribute("dx",85);
+
+      document.getElementById("c2-90-120").setAttribute("d", describeArc(x, y, r1, r2, 90, 120));
+      document.getElementById("t2-90-120").setAttribute("dx",85);
+
+      document.getElementById("c2-120-150").setAttribute("d", describeArc(x, y, r1, r2, 120, 150));
+      document.getElementById("t2-120-150").setAttribute("dx",85);
+
+      document.getElementById("c2-150-180").setAttribute("d", describeArc(x, y, r1, r2, 150, 180));
+      document.getElementById("t2-150-180").setAttribute("dx",85);
+
+      document.getElementById("c2-180-240").setAttribute("d", describeArc(x, y, r1, r2, 180, 240));
+      document.getElementById("t2-180-240").setAttribute("dx",340);
+      document.getElementById("t2-180-240").setAttribute("dy",-35);
+      document.getElementById("t2-180-240-2").setAttribute("dx",300);
+      document.getElementById("t2-180-240-2").setAttribute("dy",-10);
+
+      document.getElementById("c2-240-270").setAttribute("d", describeArc(x, y, r1, r2, 240, 270));
+      document.getElementById("t2-240-270").setAttribute("dx", 345);
+
+      document.getElementById("c2-270-300").setAttribute("d", describeArc(x, y, r1, r2, 270, 300));
+      document.getElementById("t2-270-300").setAttribute("dx", 345);
+
+      document.getElementById("c2-300-330").setAttribute("d", describeArc(x, y, r1, r2, 300, 330));
+      document.getElementById("t2-300-330").setAttribute("dx", 345);
+
+      document.getElementById("c2-330-360").setAttribute("d", describeArc(x, y, r1, r2, 330, 360));
+      document.getElementById("t2-330-360").setAttribute("dx", 345);
+
+      //
+      // Ring 3
+      //
+      r1 = 270; r2 = 350;
+      document.getElementById("c3-0-360").setAttribute("d", describeArc(x, y, r1, r2, 180, 360));
+
+    </script>
+
+  </body>
+</html>

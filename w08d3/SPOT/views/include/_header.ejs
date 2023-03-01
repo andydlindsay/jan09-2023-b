@@ -1,0 +1,29 @@
+<header>
+  <nav>
+    <div class="logo">
+      <h1><a id="logo" href="/">SPOTlight</a></h1>
+      <h3>The Lighthouse Labs Curriculum Index</h3>  
+    </div>
+    <%- include('_nav.ejs') %>
+    <div>
+      <% if (typeof title !== 'undefined'){ %>
+        <h3><%= title %></h3>
+      <% } %>
+    </div>
+    <div class="profile-summary">
+      <% if (email){ %>
+        <h5><%= email %></h5>
+        <form action="/logout" method="GET">
+          <input type="hidden" value="<%= email %>" />
+          <input type="submit" value="Logout" />
+        </form>
+      <% } else { %>
+        <form action="/login" method="POST">
+          <input type="email" name="email" placeholder="email"/>
+          <input type="password" name="password" placeholder="password"/>
+          <input type="submit" name="submit" value="Login"/>
+        </form>
+      <% } %>
+    </div>
+  </nav>
+</header>

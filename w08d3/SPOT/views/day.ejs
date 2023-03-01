@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Objectives for <%= day_mnemonic %></title>
+  <%- include('include/_head.ejs') %>
+</head>
+<body>
+  <%- include('include/_header.ejs', {title: title, day_mnemonic: day_mnemonic}) %>
+  <a href="/days/edit/<%= day_id %>">edit</a>
+  <a href="/objectives/new/<%= day_id %>">new</a>
+  <a href="/days/<%= day_id %>/quiz">quiz view</a>
+<table>
+  <colgroup>
+    <col style="width:10%">
+    <col style="width:30%">
+    <col class="answer" style="width:45%">
+    <col style="width:15%">
+  </colgroup>
+  <tbody>
+  <tr>
+    <!-- <th>Actions</th> -->
+    <!-- <th>id</th> -->
+    <th>type</th>
+    <th>question</th>
+    <th class="answer">answer</th>
+    <th>Feedback<br/>confused:fair:excellent</th>
+  </tr>
+  <% for(var i=0; i < objectives.length; i++) { %>
+    <tr id="objective_<%= objectives[i].id %>">
+      <!-- <td><%= objectives[i].id %></td> -->
+      <td><%= objectives[i].type %></td>
+      <td><a href="/objectives/<%= objectives[i].id %>"><%= objectives[i].question %></a>
+<a href="/objectives/delete/<%= objectives[i].id %>/<%= day_id %>">[x]</a>
+<a href="/objectives/edit/<%= objectives[i].id %>">[e]</a>
+      </td>
+      <td class="answer"><pre><%= objectives[i].answer %></pre></td>
+      <td><%= objectives[i].understandString %></td>
+    </tr>
+  <% } %>
+  </tbody>
+</table>
+
+<script>
+  (function($) { $(document).ready(function(){
+    $.ajax();
+  }); })(jQuery);
+</script>
+
+</body>
+</html>
