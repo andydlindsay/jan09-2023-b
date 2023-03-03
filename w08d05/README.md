@@ -7,7 +7,7 @@
 * [x] Loops
 * [x] Methods
 * [x] Hashes
-* [x] Blocks and Lambdas
+* [x] Blocks and Procs
 * [x] Classes
 
 ### Comments and Printing to Standard Out
