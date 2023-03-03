@@ -26,12 +26,16 @@ i = 0
 names = ['alice', 'bob', 'carol']
 
 # ruby's for..in === js' for..of
-# for name in names do
-#   puts "#{name} is a great name"
-# end
+for name in names do
+  puts "#{name} is a great name"
+end
 
 # names.forEach((name) => {});
 
 names.each do |name|
+  puts "hello there #{name}"
+end
+
+names.each_with_index do |name, index|
   puts "hello there #{name}"
 end
