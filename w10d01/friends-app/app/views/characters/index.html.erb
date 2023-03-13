@@ -1,0 +1,11 @@
+<h1>All the characters for <%= @location.name %>!</h1>
+
+<a href="/locations">Locations!</a>
+<%= link_to "Locations!", "/locations" %>
+<%= link_to "Locations!", locations_path %>
+
+<!-- <% @characters.each do |character| %>
+  <%= render 'character', character: character %>
+<% end %> -->
+
+<%= render @characters %>
